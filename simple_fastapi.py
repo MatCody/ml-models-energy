@@ -57,7 +57,7 @@ class ThresholdInput(BaseModel):
 
 class EnergyOutput(BaseModel):
     data: str  # DD-MM-YYYY format
-    predicted_energy: float
+    predictions: float
 
 class ThresholdOutput(BaseModel):
     datetime: str  # DD-MM-YYYY format
@@ -138,7 +138,7 @@ async def predict_energy(inputs: List[EnergyInput]):
     """
     Simple energy prediction endpoint
     Input: [{"data": "2025-01-01", "boosting": 0.0, "cor": "incolor", "espessura": 8.0, "extracao_forno": 750.0, "porcentagem_caco": 15.0, "extracao_boosting": 1.5}]
-    Output: [{"data": "01-01-2025", "predicted_energy": 4.812}]
+    Output: [{"data": "01-01-2025", "predictions": 4.812}]
     """
     if not predictor.models_loaded:
         raise HTTPException(status_code=500, detail="Models not loaded")
@@ -170,7 +170,7 @@ async def predict_energy(inputs: List[EnergyInput]):
             
             results.append(EnergyOutput(
                 data=date_obj.strftime('%d-%m-%Y'),  # DD-MM-YYYY format
-                predicted_energy=round(float(prediction), 6)
+                predictions=round(float(prediction), 6)
             ))
         
         return results
