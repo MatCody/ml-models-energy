@@ -225,14 +225,14 @@ async def predict_threshold(inputs: List[ThresholdInput]):
             
             # Add results
             results_83.append(ThresholdOutput(
-                datetime=date_obj.strftime('%d-%m-%Y'),  # DD-MM-YYYY format
+                datetime=date_obj.strftime('%Y-%m-%d'),  # DD-MM-YYYY format
                 threshold=8300,
                 probabilidade_de_estouro=round(prob_83, 4),
                 estouro_previsto=int(prob_83 > 0.5)
             ))
             
             results_90.append(ThresholdOutput(
-                datetime=date_obj.strftime('%d-%m-%Y'),  # DD-MM-YYYY format
+                datetime=date_obj.strftime('%Y-%m-%d'),  # DD-MM-YYYY format
                 threshold=9000,
                 probabilidade_de_estouro=round(prob_90, 4),
                 estouro_previsto=int(prob_90 > 0.5)
